@@ -10,24 +10,19 @@ import {
   Keyboard,
   Platform,
   TouchableWithoutFeedback,
-  Dimensions,
+  
 } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
 
 const initialState = {
   login: '',
   email: '',
   password: '',
 }
-export default function App() {
+export default function LoginScreen({navigation}) {
   const [userData, setUserData] = useState(initialState)
-  const [isClicked, setIsClicked] = useState(true);
   const [isShowPsw, setIsShowPsw] = useState(false)
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  const handleAnimationcloseIcon = () => {
-  setIsClicked((prevState) => !prevState)
-  };
   const handleChangeShowPsw = () => {
     setIsShowPsw((prevState) => !prevState)
   }
@@ -54,41 +49,22 @@ export default function App() {
        }
        }>
          <ImageBackground
-        source={require('./assets/images/photo_bg.jpg')}
+        source={require('../../assets/images/photo_bg.jpg')}
          style={styles.imageBg}>
          <KeyboardAvoidingView
          behavior={Platform.OS === "ios" ? "padding" : null}
          >
-          <View style={[styles.form, {marginBottom: isShowKeyboard ? -210 : 0}]}>
-           <View style={[styles.userPhoto, {marginHorizontal: (Dimensions.get('window').width - 120 - 15 * 2) / 2}]}>
-            <Icon 
-               style={[styles.closeIcon,   {transform: [{ rotateZ: isClicked ? '45deg' : '0deg' }]}]} 
-               name="closecircleo" 
-               size={25} 
-               color= {isClicked ? "#FF6C00" : '#E8E8E8'}  
-               onPress={handleAnimationcloseIcon}/>
-           </View>
-           <Text style={styles.title}>Регистрация</Text>
-            <TextInput
-             style={styles.input}
-             placeholder={'Логин'}
-             placeholderTextColor={'#BDBDBD'}
-             value={userData.login}
-              onChangeText={(value) => setUserData((prevState) => ({...prevState, login: value}))}
-             onFocus={() => setIsShowKeyboard(true)} 
-             />
+          <View style={[styles.form, {marginBottom: isShowKeyboard ? -230 : 0 }]}>
+           <Text style={styles.title}>Войти</Text>
           
-           <View style={{marginVertical: 16}}>
             <TextInput
-              style={styles.input}
+              style={[styles.input, {marginBottom: 16}]}
               placeholder={'Адрес электронной почты'}
                placeholderTextColor={'#BDBDBD'}
                value={userData.email}
                onChangeText={(value) => setUserData((prevState) => ({...prevState, email: value}))}
              onFocus={() => setIsShowKeyboard(true)} 
                />
-             
-           </View>
            <View style={ styles.pswContainer}>
              <TextInput
             style={styles.inputPsw} 
@@ -110,13 +86,14 @@ export default function App() {
              onPress={handleFormSubmit}
              underlayColor='#FF6C00'
                style={{ borderRadius: 100, backgroundColor: '#FF6C00', marginTop: 43 }}>
-               <Text style={ [styles.registerButtonText, styles.text]}>Зарегистрироваться</Text>
+               <Text style={ [styles.registerButtonText, styles.text]}>Войти</Text>
            </TouchableHighlight>
-            <TouchableHighlight
-             onPress={() => console.log('redirection on sign in page')}
-             underlayColor='transparent'
+               <TouchableHighlight
+                  underlayColor='transparent'
                >
-               <Text style={ [styles.signInText, styles.text]}>Уже есть аккаунт? Войти</Text>
+                 <Text style={[styles.signInText, styles.text]}>Нет аккаунта?{ " "}
+                   <Text onPress={() => navigation.navigate('Registr')}>Зарегистрироваться</Text>
+                 </Text>
             </TouchableHighlight>
 
           </View>
@@ -142,7 +119,7 @@ const styles = StyleSheet.create({
   },
   form: {
     paddingHorizontal: 15,
-    paddingBottom: 78,
+    paddingBottom: 144,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -155,19 +132,6 @@ const styles = StyleSheet.create({
     lineHeight: 19, 
 
   },
-  userPhoto: {
-    position: 'relative',
-    width: 120,
-    height: 120,
-    backgroundColor: '#F6F6F6',
-    borderRadius: 16,
-    marginTop: -60,
-  },
-  closeIcon: {
-    position: 'absolute',
-    top: 81,
-    left: 107,
-},
   title: {
     textAlign: 'center',
     fontSize: 30,
