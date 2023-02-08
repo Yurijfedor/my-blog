@@ -1,19 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { PostsList } from "../../components/postsList";
+
 const Posts = () => {
   return (
-    <View style={styles.container}>
-      <Text>Posts Screen</Text>
-    </View>
+    <PostsList/>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default Posts;

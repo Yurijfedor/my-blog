@@ -10,7 +10,7 @@ import {
   Keyboard,
   Platform,
   TouchableWithoutFeedback,
-  
+  Alert
 } from 'react-native';
 
 const initialState = {
@@ -27,12 +27,11 @@ export default function LoginScreen({navigation}) {
     setIsShowPsw((prevState) => !prevState)
   }
   const handleFormSubmit = () => {
+    userData.email !== "" && userData.password !== "" ? navigation.navigate('Home') : Alert.alert('empty field', 'all fields must be filled')
     setUserData(initialState)
     setIsShowKeyboard(false)
     Keyboard.dismiss()
     console.log(userData)
-    console.log(isShowKeyboard);
-    console.log(Platform.OS);
   }
 
    Keyboard.addListener('keyboardDidHide', () => {

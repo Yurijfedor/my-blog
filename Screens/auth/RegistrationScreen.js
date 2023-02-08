@@ -11,6 +11,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Dimensions,
+  Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -32,12 +33,11 @@ export default function RegistrationScreen({navigation}) {
     setIsShowPsw((prevState) => !prevState)
   }
   const handleFormSubmit = () => {
+    userData.email !== "" && userData.password !== "" && userData.login !== "" ? navigation.navigate('Home') : Alert.alert('empty field', 'all fields must be filled')
     setUserData(initialState)
     setIsShowKeyboard(false)
     Keyboard.dismiss()
     console.log(userData)
-    console.log(isShowKeyboard);
-    console.log(Platform.OS);
   }
 
    Keyboard.addListener('keyboardDidHide', () => {
