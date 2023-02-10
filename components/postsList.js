@@ -10,22 +10,21 @@ const styles = StyleSheet.create({
   }
 });
 
- export const PostsList = () => {
+ export const PostsList = ({posts}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={[
-        { imageSrc: ImagesAssets.foto1, name: "Svyatoslav Shaklak", email: "svyatoslav@mail.com" },
-        ]}
+        data={posts}
+       keyExtractor={(item, i) => i.toString()}
               renderItem={({ item }) => (
                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
                   <Image
-                    style={{width: 60, height: 60, borderRadius: 10 }}
-                    source={item.imageSrc}
+                    style={{width: 60, height: 60, borderRadius: 10, backgroundColor: 'gray' }}
+                    source={item.postsDate.photo}
                   />
                     <View style={{marginLeft: 8}}>
-                          <Text style={{fontSize: 13, fontWeight: '700'}}>{item.name}</Text>   
-                          <Text style={{fontSize: 11, fontWeight: '400'}}>{ item.email}</Text>
+                          <Text style={{fontSize: 13, fontWeight: '700'}}>{item.postsDate.name}</Text>   
+                          <Text style={{fontSize: 11, fontWeight: '400'}}>{item.postsDate.location}</Text>
                     </View> 
                 </View>
               )}
