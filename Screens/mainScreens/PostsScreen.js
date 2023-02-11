@@ -1,21 +1,21 @@
-import React, {useState, useEffect} from "react";
-import { PostsList } from "../../components/postsList";
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Posts = ({ route }) => {
-  const [posts, setPosts] = useState([])
-  // console.log(route.params);
+import DefaultPostsScreen from "../nestedScreens/DefaultScreenPosts";
+import Comment from "../nestedScreens/CommentsScreen";
+import Map from "../nestedScreens/MapScreen";
 
-  useEffect(() => {
-    if (route.params) {
-       setPosts((prevState) => [...prevState, route.params])
-    }
-   
-  }, [route.params])
-  // console.log(posts);
+const NestedScreen = createStackNavigator()
+
+const Posts = () => {
+  
   return (
-    <PostsList posts={ posts} />
+    <NestedScreen.Navigator screenOptions={{headerShown: false}}>
+      <NestedScreen.Screen name="DefaultScreen" component={DefaultPostsScreen}></NestedScreen.Screen>
+      <NestedScreen.Screen name="Comment" component={Comment}></NestedScreen.Screen>
+      <NestedScreen.Screen name="Map" component={Map}></NestedScreen.Screen>
+    </NestedScreen.Navigator>
   );
 };
-
 
 export default Posts;

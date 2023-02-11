@@ -14,11 +14,12 @@ export const UseRoute = (isAuth) => {
     <AuthStack.Navigator>
       <AuthStack.Screen options={{headerShown: false}} name='Login' component={LoginScreen}></AuthStack.Screen>
       <AuthStack.Screen options={{ headerShown: false }} name='Registr' component={RegistrationScreen}></AuthStack.Screen>
-      <AuthStack.Screen  options={{ headerShown: false }} name='Home' component={Home}></AuthStack.Screen>        
+      <AuthStack.Screen options={{ headerShown: false }} name='Home' component={Home}></AuthStack.Screen>   
     </AuthStack.Navigator>
   )  
   }
   return (
+
     <Home/>
   )
 }
